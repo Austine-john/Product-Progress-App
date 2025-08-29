@@ -1,19 +1,60 @@
-import "./Navbar.css" ;
-export default function Navbar(){
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import "../../styles/Navbar.css";
 
-    return(
-        <nav className="navbar">
-            <div className="left-nav">
-            <img src="logo.png" alt="Logo" />
-            <h2>Product Tracker</h2>
-            </div>
+const Navbar = () => {
+  const location = useLocation();
 
-            <ul className="nav-links">
-                <li><a href="Dashboard">Dashboard</a></li>
-                <li><a href="Team Management">Team Management</a></li>
-                <li><a href="Reports">Reports</a></li>
-                <li><a href="Products">Products</a></li>
-            </ul>
-        </nav>
-    )
-}
+  const isActive = (path) => location.pathname === path;
+
+  return (
+    <nav className="navbar">
+      <div className="navbar-container">
+        {/* Logo */}
+        <div className="navbar-brand">
+          <Link to="/" className="navbar-logo">
+            <span className="logo-icon">📦</span>
+            ProductTracker
+          </Link>
+        </div>
+
+        {/* Navigation Links */}
+        <div className="navbar-menu">
+          <Link 
+            to="/" 
+            className={`navbar-item ${isActive('/') ? 'active' : ''}`}
+          >
+            Dashboard
+          </Link>
+          <Link 
+            to="/products" 
+            className={`navbar-item ${isActive('/products') ? 'active' : ''}`}
+          >
+            Products
+          </Link>
+          <Link 
+            to="/teams" 
+            className={`navbar-item ${isActive('/teams') ? 'active' : ''}`}
+          >
+            Teams
+          </Link>
+          <Link 
+            to="/reports" 
+            className={`navbar-item ${isActive('/reports') ? 'active' : ''}`}
+          >
+            Reports
+          </Link>
+        </div>
+
+        {/* User Profile */}
+        <div className="navbar-user">
+          <div className="user-avatar">
+            <span>👤</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
