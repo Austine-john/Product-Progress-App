@@ -6,6 +6,7 @@
   "scripts": {
     "server": "json-server --watch data/db.json --port 5000",
     "dev": "vite",
+    "start":"react-scripts start",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
