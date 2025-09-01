@@ -6,13 +6,17 @@
   "scripts": {
     "server": "json-server --watch data/db.json --port 5000",
     "dev": "vite",
-    "start":"react-scripts start",
+    "start": "react-scripts start",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.0.0",
+    "@fortawesome/free-solid-svg-icons": "^7.0.0",
+    "@fortawesome/react-fontawesome": "^3.0.2",
     "axios": "^1.11.0",
+    "bootstrap": "^5.3.8",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.8.2"
@@ -29,4 +33,3 @@
     "vite": "^7.1.2"
   }
 }
-

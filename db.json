@@ -1,355 +1,126 @@
 {
   "products": [
     {
-      "id": "1",
-      "name": "IoT Sensor Module",
-      "description": "Advanced IoT sensors for industrial monitoring with real-time data analytics",
-      "client": "TechCorp",
-      "stage": 3,
-      "assignedMembers": [2, 3],
-      "progress": 50,
+      "id": "REQ-001",
+      "name": "Custom Mobile App",
+      "customer": "TechCorp Inc.",
+      "status": "dispatch",
+      "progress": 100,
+      "stage": "Dispatch",
+      "assignedTeam": "Team Alpha",
+      "dueDate": "2024-09-15",
+      "priority": "high"
+    },
+    {
+      "id": "REQ-002",
+      "name": "E-commerce Website",
+      "customer": "RetailMax",
+      "status": "qa",
+      "progress": 75,
+      "stage": "Qa",
+      "assignedTeam": "Team Beta",
+      "dueDate": "2024-09-22",
+      "priority": "medium"
+    },
+    {
+      "id": "REQ-003",
+      "name": "Dashboard Analytics",
+      "customer": "DataFlow Ltd.",
+      "status": "qa",
+      "progress": 75,
+      "stage": "QA Testing",
+      "assignedTeam": "Team Gamma",
+      "dueDate": "2024-09-08",
+      "priority": "high"
+    },
+    {
+      "id": "REQ-004",
+      "name": "Payment Integration",
+      "customer": "FinanceHub",
+      "status": "dispatch",
+      "progress": 100,
+      "stage": "Ready for Dispatch",
+      "assignedTeam": "Team Alpha",
+      "dueDate": "2024-09-03",
+      "priority": "low"
+    },
+    {
+      "id": "REQ-706",
+      "name": "AI-Chip",
+      "customer": "Beprisa Enterprises",
+      "status": "design",
+      "stage": "Design",
+      "assignedTeam": "Omega",
+      "dueDate": "2025-09-06",
       "priority": "high",
-      "budget": 250000,
-      "dueDate": "2024-12-15T17:00:00Z",
-      "createdAt": "2024-08-19T10:00:00Z",
-      "logs": [
-        {
-          "id": 1,
-          "productId": 1,
-          "stage": 1,
-          "notes": "Procurement started for initial components",
-          "actor": "Alice Johnson",
-          "timestamp": "2024-08-20T09:15:00Z"
-        },
-        {
-          "id": 2,
-          "productId": 1,
-          "stage": 2,
-          "notes": "Moved to Design and Research phase",
-          "actor": "Bob Smith",
-          "timestamp": "2024-08-22T11:00:00Z"
-        },
-        {
-          "id": 3,
-          "productId": 1,
-          "stage": 3,
-          "notes": "Development phase initiated, prototype in progress",
-          "actor": "Carol Williams",
-          "timestamp": "2024-09-05T14:20:00Z"
-        },
-        {
-          "id": 4,
-          "productId": 1,
-          "stage": 3,
-          "notes": "First prototype completed, moving to testing",
-          "actor": "David Brown",
-          "timestamp": "2024-09-18T16:45:00Z"
-        }
-      ]
+      "progress": 25
+    }
+  ],
+  "activities": [
+    {
+      "id": "1",
+      "type": "request",
+      "message": "New request received: Custom Mobile App",
+      "time": "2 hours ago",
+      "icon": "file-alt"
     },
     {
       "id": "2",
-      "name": "Factory Automation Software",
-      "description": "Comprehensive automation suite for manufacturing processes",
-      "client": "InduWorks",
-      "stage": 1,
-      "assignedMembers": [1],
-      "progress": 10,
-      "priority": "medium",
-      "budget": 180000,
-      "dueDate": "2025-03-20T17:00:00Z",
-      "createdAt": "2024-08-21T12:00:00Z",
-      "logs": [
-        {
-          "id": 5,
-          "productId": 2,
-          "stage": 1,
-          "notes": "Procurement initiated for software licenses and development tools",
-          "actor": "Alice Johnson",
-          "timestamp": "2024-08-21T14:30:00Z"
-        },
-        {
-          "id": 6,
-          "productId": 2,
-          "stage": 1,
-          "notes": "Requirements gathering session with client",
-          "actor": "Eva Davis",
-          "timestamp": "2024-08-25T10:00:00Z"
-        }
-      ]
+      "type": "approval",
+      "message": "Design approved for E-commerce Website",
+      "time": "4 hours ago",
+      "icon": "check-circle"
     },
     {
       "id": "3",
-      "name": "Smart Home Hub",
-      "description": "Central control unit for smart home devices with AI integration",
-      "client": "HomeTech Solutions",
-      "stage": 4,
-      "assignedMembers": [4, 5],
-      "progress": 85,
-      "priority": "high",
-      "budget": 320000,
-      "dueDate": "2024-11-30T17:00:00Z",
-      "createdAt": "2024-06-10T08:00:00Z",
-      "logs": [
-        {
-          "id": 7,
-          "productId": 3,
-          "stage": 4,
-          "notes": "Final testing phase, beta release to selected customers",
-          "actor": "Frank Miller",
-          "timestamp": "2024-09-20T15:30:00Z"
-        },
-        {
-          "id": 8,
-          "productId": 3,
-          "stage": 4,
-          "notes": "Bug fixes completed, preparing for final release",
-          "actor": "Grace Wilson",
-          "timestamp": "2024-09-22T11:15:00Z"
-        }
-      ]
+      "type": "assignment",
+      "message": "Team Gamma assigned to Dashboard Analytics",
+      "time": "6 hours ago",
+      "icon": "user-tie"
     },
     {
       "id": "4",
-      "name": "Medical Monitoring Device",
-      "description": "Wearable health monitor with emergency alert system",
-      "client": "MediCare Inc.",
-      "stage": 2,
-      "assignedMembers": [2, 6],
-      "progress": 30,
-      "priority": "critical",
-      "budget": 450000,
-      "dueDate": "2025-02-28T17:00:00Z",
-      "createdAt": "2024-09-01T09:00:00Z",
-      "logs": [
-        {
-          "id": 9,
-          "productId": 4,
-          "stage": 2,
-          "notes": "Design phase started, initial prototypes being developed",
-          "actor": "Bob Smith",
-          "timestamp": "2024-09-10T13:45:00Z"
-        },
-        {
-          "id": 10,
-          "productId": 4,
-          "stage": 2,
-          "notes": "Client approved initial design concepts",
-          "actor": "Henry Taylor",
-          "timestamp": "2024-09-18T16:20:00Z"
-        }
-      ]
+      "type": "milestone",
+      "message": "Production started for Custom Mobile App",
+      "time": "1 day ago",
+      "icon": "clipboard-check"
     },
     {
       "id": "5",
-      "name": "E-commerce Platform Upgrade",
-      "description": "Modernization of existing e-commerce platform with new features",
-      "client": "ShopGlobal",
-      "stage": 5,
-      "assignedMembers": [3, 7],
-      "progress": 95,
-      "priority": "medium",
-      "budget": 200000,
-      "dueDate": "2024-10-15T17:00:00Z",
-      "createdAt": "2024-05-15T14:00:00Z",
-      "logs": [
-        {
-          "id": 11,
-          "productId": 5,
-          "stage": 5,
-          "notes": "Final deployment preparation, client training scheduled",
-          "actor": "Ivy Anderson",
-          "timestamp": "2024-09-25T10:00:00Z"
-        },
-        {
-          "id": 12,
-          "productId": 5,
-          "stage": 5,
-          "notes": "Launch marketing campaign initiated",
-          "actor": "Jack Martinez",
-          "timestamp": "2024-09-26T14:30:00Z"
-        }
-      ]
-    },
-    {
-      "id": "6",
-      "name": "Agricultural Drone System",
-      "description": "AI-powered drones for precision agriculture and crop monitoring",
-      "client": "AgroTech Farms",
-      "stage": 3,
-      "assignedMembers": [4, 8],
-      "progress": 60,
-      "priority": "high",
-      "budget": 380000,
-      "dueDate": "2025-01-31T17:00:00Z",
-      "createdAt": "2024-07-22T11:00:00Z",
-      "logs": [
-        {
-          "id": 13,
-          "productId": 6,
-          "stage": 3,
-          "notes": "Development phase, first flight tests successful",
-          "actor": "David Brown",
-          "timestamp": "2024-09-15T09:30:00Z"
-        },
-        {
-          "id": 14,
-          "productId": 6,
-          "stage": 3,
-          "notes": "AI algorithms integration in progress",
-          "actor": "Karen White",
-          "timestamp": "2024-09-23T15:45:00Z"
-        }
-      ]
+      "type": "completion",
+      "message": "QA completed for Payment Integration",
+      "time": "2 days ago",
+      "icon": "check-circle"
     }
   ],
-  "users": [
+  "teams": [
     {
-      "id": 1,
-      "name": "Alice Johnson",
-      "email": "alice@company.com",
-      "role": "Product Manager",
-      "department": "Management",
-      "isActive": true,
-      "currentProductId": 2,
-      "avatar": "👩‍💼",
-      "skills": ["Project Management", "Agile", "Scrum"]
+      "id": "1",
+      "name": "Team Alpha",
+      "members": 5,
+      "projects": 2,
+      "lead": "Sarah Johnson"
     },
     {
-      "id": 2,
-      "name": "Bob Smith",
-      "email": "bob@company.com",
-      "role": "UX Designer",
-      "department": "Design",
-      "isActive": true,
-      "currentProductId": 1,
-      "avatar": "👨‍🎨",
-      "skills": ["UI/UX Design", "Figma", "User Research"]
+      "id": "2",
+      "name": "Team Beta",
+      "members": 4,
+      "projects": 1,
+      "lead": "Mike Chen"
     },
     {
-      "id": 3,
-      "name": "Carol Williams",
-      "email": "carol@company.com",
-      "role": "Software Engineer",
-      "department": "Development",
-      "isActive": true,
-      "currentProductId": 1,
-      "avatar": "👩‍💻",
-      "skills": ["JavaScript", "React", "Node.js"]
+      "id": "3",
+      "name": "Team Gamma",
+      "members": 6,
+      "projects": 1,
+      "lead": "Emily Davis"
     },
     {
-      "id": 4,
-      "name": "David Brown",
-      "email": "david@company.com",
-      "role": "Hardware Engineer",
-      "department": "Development",
-      "isActive": true,
-      "currentProductId": 3,
-      "avatar": "👨‍🔧",
-      "skills": ["Embedded Systems", "PCB Design", "IoT"]
-    },
-    {
-      "id": 5,
-      "name": "Eva Davis",
-      "email": "eva@company.com",
-      "role": "Quality Assurance",
-      "department": "Testing",
-      "isActive": true,
-      "currentProductId": 3,
-      "avatar": "👩‍🔬",
-      "skills": ["Testing", "Automation", "Bug Tracking"]
-    },
-    {
-      "id": 6,
-      "name": "Frank Miller",
-      "email": "frank@company.com",
-      "role": "Marketing Specialist",
-      "department": "Marketing",
-      "isActive": true,
-      "currentProductId": 4,
-      "avatar": "👨‍💼",
-      "skills": ["Digital Marketing", "SEO", "Content Strategy"]
-    },
-    {
-      "id": 7,
-      "name": "Grace Wilson",
-      "email": "grace@company.com",
-      "role": "DevOps Engineer",
-      "department": "Development",
-      "isActive": true,
-      "currentProductId": 5,
-      "avatar": "👩‍🚀",
-      "skills": ["AWS", "Docker", "CI/CD"]
-    },
-    {
-      "id": 8,
-      "name": "Henry Taylor",
-      "email": "henry@company.com",
-      "role": "Data Scientist",
-      "department": "Research",
-      "isActive": true,
-      "currentProductId": 6,
-      "avatar": "👨‍🔬",
-      "skills": ["Python", "Machine Learning", "Data Analysis"]
-    },
-    {
-      "id": 9,
-      "name": "Ivy Anderson",
-      "email": "ivy@company.com",
-      "role": "Business Analyst",
-      "department": "Management",
-      "isActive": true,
-      "currentProductId": null,
-      "avatar": "👩‍💻",
-      "skills": ["Requirements Analysis", "Documentation", "Process Improvement"]
-    },
-    {
-      "id": 10,
-      "name": "Jack Martinez",
-      "email": "jack@company.com",
-      "role": "Frontend Developer",
-      "department": "Development",
-      "isActive": false,
-      "currentProductId": null,
-      "avatar": "👨‍💻",
-      "skills": ["React", "Vue.js", "CSS"]
-    }
-  ],
-  "departments": [
-    {
-      "id": 1,
-      "name": "Procurement",
-      "description": "Initial procurement and resource acquisition phase",
-      "color": "#3b82f6",
-      "order": 1
-    },
-    {
-      "id": 2,
-      "name": "Design & Research",
-      "description": "Product design, prototyping, and market research",
-      "color": "#8b5cf6",
-      "order": 2
-    },
-    {
-      "id": 3,
-      "name": "Development",
-      "description": "Product development and engineering phase",
-      "color": "#ec4899",
-      "order": 3
-    },
-    {
-      "id": 4,
-      "name": "Testing & QA",
-      "description": "Quality assurance and testing phase",
-      "color": "#f59e0b",
-      "order": 4
-    },
-    {
-      "id": 5,
-      "name": "Deployment",
-      "description": "Product launch, deployment, and client handover",
-      "color": "#10b981",
-      "order": 5
+      "id": 1756656663551,
+      "name": "Omega",
+      "members": 7,
+      "projects": 0,
+      "lead": "Reece James"
     }
   ]
 }
