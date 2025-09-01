@@ -1,7 +1,7 @@
 import React from 'react';
 import { useProductContext } from '../../context/ProductContext';
-import StatusBadge from './common/StatusBadge';
-import ProgressBar from './common/ProgressBar';
+import StatusBadge from '../common/StatusBadge';
+import ProgressBar from '../common/ProgressBar';
 
 const ProductCard = ({ product }) => {
   const { handleUpdateStatus } = useProductContext();

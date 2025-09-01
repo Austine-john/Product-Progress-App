@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useProductContext } from './context/ProductContext';
-import Navbar from '../components/common/Navbar';
-import DashboardPage from '../components/dashboard/DashboardPage';
-import ProductsPage from '../components/products/ProductsPage';
-import TeamsPage from '../components/teams/TeamsPage';
-import ReportsPage from '../components/reports/ReportsPage';
-import NewRequestModal from '../components/products/NewRequestModal';
-import AddTeamModal from '../components/teams/AddTeamModal';
+import Navbar from './components/common/Navbar';
+import DashboardPage from './components/dashboard/DashboardPage';
+import ProductsPage from './components/products/ProductsPage';
+import TeamsPage from './components/teams/TeamsPage';
+import ReportsPage from './components/reports/ReportsPage';
+import NewRequestModal from './components/products/NewRequestModal';
+import AddTeamModal from './components/teams/AddTeamModal';
 
 function App() {
   const { isLoading } = useProductContext();
