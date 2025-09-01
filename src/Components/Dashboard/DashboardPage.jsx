@@ -1,6 +1,6 @@
 import React from 'react';
 import { useProductContext } from '../../context/ProductContext';
-import StatsCard from './common/StatsCard';
+import StatsCard from '../common/StatsCard';
 import ProductSummaryCard from './ProductSummaryCard';
 import ActivityLog from './ActivityLog'; 
 import { faBox, faCheckCircle, faHourglassStart, faUsers } from '@fortawesome/free-solid-svg-icons';

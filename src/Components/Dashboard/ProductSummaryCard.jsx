@@ -1,6 +1,6 @@
 import React from 'react';
-import StatusBadge from './common/StatusBadge';
-import ProgressBar from './common/ProgressBar';
+import StatusBadge from '../common/StatusBadge';
+import ProgressBar from '../common/ProgressBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPeopleGroup, faCalendarDays } from '@fortawesome/free-solid-svg-icons';
 
