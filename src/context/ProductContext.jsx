@@ -1,205 +1,150 @@
-import React, { useState, useEffect } from 'react';
-import { ProductContext } from './ProductContextInstance';
-import { 
-  getProducts, 
-  getUsers, 
-  getDepartments, 
-  updateProduct,
-  createProduct,
-  deleteProduct
-} from '../api/ProductsApi';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { apiService } from '../services/apiService';
 
-// Provider Component
+const ProductContext = createContext();
+
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [departments, setDepartments] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [activities, setActivities] = useState([]);
+  const [teams, setTeams] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const [productsData, usersData, departmentsData] = await Promise.all([
-          getProducts(),
-          getUsers(),
-          getDepartments()
-        ]);
-        
-        setProducts(productsData);
-        setUsers(usersData);
-        setDepartments(departmentsData);
-        setError(null);
-      } catch (err) {
-        setError('Failed to fetch data: ' + err.message);
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchData();
   }, []);
 
-  const addProduct = async (productData) => {
-    try {
-      const newProduct = await createProduct(productData);
-      setProducts(prev => [...prev, newProduct]);
-      return newProduct;
-    } catch (err) {
-      setError('Failed to create product: ' + err.message);
-      throw err;
-    }
-  };
-
-  const removeProduct = async (productId) => {
-    try {
-      await deleteProduct(productId);
-      setProducts(prev => prev.filter(p => p.id !== productId));
-    } catch (err) {
-      setError('Failed to delete product: ' + err.message);
-      throw err;
-    }
-  };
-
-  const updateProductStage = async (productId, newStage, notes, actor) => {
-    try {
-      const product = products.find(p => p.id === productId);
-      if (!product) throw new Error('Product not found');
-      
-      const updatedProduct = await updateProduct(productId, {
-        stage: newStage,
-        progress: Math.min(100, Math.floor((newStage / departments.length) * 100)),
-        logs: [
-          ...product.logs,
-          {
-            id: Date.now(),
-            productId,
-            stage: newStage,
-            notes,
-            actor,
-            timestamp: new Date().toISOString()
-          }
-        ]
+  const fetchData = () => {
+    setIsLoading(true);
+    setError(null);
+    
+    apiService.fetchData()
+      .then(data => {
+        setProducts(data.products);
+        setActivities(data.activities);
+        setTeams(data.teams);
+      })
+      .catch(err => {
+        setError('Failed to load data. Please check if JSON Server is running.');
+        console.error('Failed to fetch data:', err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
-      
-      setProducts(prev => prev.map(p => 
-        p.id === productId ? updatedProduct : p
-      ));
-      
-      return updatedProduct;
-    } catch (err) {
-      setError('Failed to update product: ' + err.message);
-      throw err;
-    }
   };
 
-  const addMemberToProduct = async (productId, userId) => {
-    try {
-      const product = products.find(p => p.id === productId);
-      if (!product) throw new Error('Product not found');
-      
-      // Check if user is already assigned
-      if (product.assignedMembers.includes(userId)) {
-        throw new Error('User is already assigned to this product');
-      }
-      
-      const updatedAssignedMembers = [...product.assignedMembers, userId];
-      const updatedProduct = await updateProduct(productId, { 
-        assignedMembers: updatedAssignedMembers 
+  const handleUpdateStatus = (id, newStatus) => {
+    const productToUpdate = products.find(p => p.id === id);
+    if (!productToUpdate) return;
+    
+    const updatedProduct = { 
+      ...productToUpdate, 
+      status: newStatus, 
+      stage: newStatus.charAt(0).toUpperCase() + newStatus.slice(1), 
+      progress: newStatus === 'design' ? 25 : newStatus === 'production' ? 50 : newStatus === 'qa' ? 75 : 100 
+    };
+    
+    apiService.updateProduct(updatedProduct)
+      .then(savedProduct => {
+        setProducts(prevProducts => prevProducts.map(p => p.id === id ? savedProduct : p));
+        
+        // Add activity log
+        const newActivity = {
+          type: 'status_update',
+          message: `${productToUpdate.name} status changed to '${updatedProduct.stage}'`,
+          time: 'just now',
+          icon: 'box-open'
+        };
+        
+        setActivities(prevActivities => [newActivity, ...prevActivities]);
+      })
+      .catch(error => {
+        console.error("Failed to update product:", error);
+        setError('Failed to update product');
       });
-      
-      setProducts(prev => prev.map(p => 
-        p.id === productId ? updatedProduct : p
-      ));
-      
-      return updatedProduct;
-    } catch (err) {
-      setError('Failed to assign member: ' + err.message);
-      throw err;
-    }
   };
 
-  const removeMemberFromProduct = async (productId, userId) => {
-    try {
-      const product = products.find(p => p.id === productId);
-      if (!product) throw new Error('Product not found');
-      
-      const updatedAssignedMembers = product.assignedMembers.filter(id => id !== userId);
-      const updatedProduct = await updateProduct(productId, { 
-        assignedMembers: updatedAssignedMembers 
+  const handleAddRequest = (newRequest) => {
+    const newProduct = { 
+      ...newRequest, 
+      id: `REQ-${String(Math.floor(Math.random() * 999) + 1).padStart(3, '0')}`, 
+      progress: 25 
+    };
+    
+    apiService.addProduct(newProduct)
+      .then(savedProduct => {
+        setProducts(prevProducts => [...prevProducts, savedProduct]);
+        
+        // Add activity log
+        const newActivity = {
+          type: 'request',
+          message: `New request added: ${newProduct.name}`,
+          time: 'just now',
+          icon: 'plus'
+        };
+        
+        setActivities(prevActivities => [newActivity, ...prevActivities]);
+      })
+      .catch(error => {
+        console.error("Failed to add new request:", error);
+        setError('Failed to add new request');
       });
-      
-      setProducts(prev => prev.map(p => 
-        p.id === productId ? updatedProduct : p
-      ));
-      
-      return updatedProduct;
-    } catch (err) {
-      setError('Failed to remove member: ' + err.message);
-      throw err;
-    }
   };
 
-  const addLogEntry = async (productId, logData) => {
-    try {
-      const product = products.find(p => p.id === productId);
-      if (!product) throw new Error('Product not found');
-      
-      const newLog = {
-        id: Date.now(),
-        productId,
-        ...logData,
-        timestamp: new Date().toISOString()
-      };
-      
-      const updatedLogs = [...product.logs, newLog];
-      const updatedProduct = await updateProduct(productId, { logs: updatedLogs });
-      
-      setProducts(prev => prev.map(p => 
-        p.id === productId ? updatedProduct : p
-      ));
-      
-      return updatedProduct;
-    } catch (err) {
-      setError('Failed to add log entry: ' + err.message);
-      throw err;
-    }
+  const handleAddTeam = (newTeam) => {
+    const teamWithId = { ...newTeam, id: Date.now() };
+    
+    apiService.addTeam(teamWithId)
+      .then(savedTeam => {
+        setTeams(prevTeams => [...prevTeams, savedTeam]);
+      })
+      .catch(error => {
+        console.error("Failed to add new team:", error);
+        setError('Failed to add new team');
+      });
   };
 
-  const getProductsByDepartment = (departmentId) => {
-    return products.filter(product => product.stage === departmentId);
+  const handleDeleteProduct = (id) => {
+    apiService.deleteProduct(id)
+      .then(() => {
+        setProducts(prevProducts => prevProducts.filter(p => p.id !== id));
+      })
+      .catch(error => {
+        console.error("Failed to delete product:", error);
+        setError('Failed to delete product');
+      });
   };
 
-  const getDepartmentById = (departmentId) => {
-    return departments.find(dept => dept.id === departmentId);
+  const handleDeleteTeam = (id) => {
+    apiService.deleteTeam(id)
+      .then(() => {
+        setTeams(prevTeams => prevTeams.filter(t => t.id !== id));
+      })
+      .catch(error => {
+        console.error("Failed to delete team:", error);
+        setError('Failed to delete team');
+      });
   };
 
-  const getUserById = (userId) => {
-    return users.find(user => user.id === userId);
-  };
-
-  const value = {
-    products,
-    users,
-    departments,
-    loading,
+  const value = { 
+    products, 
+    activities, 
+    teams, 
+    isLoading, 
     error,
-    addProduct,
-    removeProduct,
-    updateProductStage,
-    addMemberToProduct,
-    removeMemberFromProduct,
-    addLogEntry,
-    getProductsByDepartment,
-    getDepartmentById,
-    getUserById
+    handleUpdateStatus, 
+    handleAddRequest, 
+    handleAddTeam,
+    handleDeleteProduct,
+    handleDeleteTeam,
+    refetchData: fetchData
   };
-
+  
   return (
     <ProductContext.Provider value={value}>
       {children}
     </ProductContext.Provider>
   );
 };
+
+export const useProductContext = () => useContext(ProductContext);

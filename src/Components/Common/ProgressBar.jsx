@@ -1,14 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
-import "../../styles/charts.css";
-
-const ProgressBar = ({ progress }) => {
-  return (
-    <div className="progress-bar">
-      <div 
-        className="progress-fill" 
-        style={{ width: `${progress}%` }}
-=======
 
 const ProgressBar = ({ progress, status }) => {
   const getStatusClass = () => {
@@ -42,14 +32,9 @@ const ProgressBar = ({ progress, status }) => {
         aria-valuenow={progress}
         aria-valuemin="0"
         aria-valuemax="100"
->>>>>>> 44136ca (refactored codebase and made common re-useable components)
       ></div>
     </div>
   );
 };
 
-<<<<<<< HEAD
 export default ProgressBar;
-=======
-export default ProgressBar;
->>>>>>> 44136ca (refactored codebase and made common re-useable components)
